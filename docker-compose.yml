@@ -1,0 +1,24 @@
+version: '3'
+services: 
+  react: 
+    container_name: team2-front
+    build: ./react-docker/
+    stdin_open: true
+    tty: true
+    environment: 
+      - CHOKIDAR_USEPOLLING=true 
+    volumes:
+      - ./team2:/usr/src/app
+    ports:
+    - 3000:3000
+  
+  api:
+    container_name: team2-api
+    build: ./api-docker/
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./team2:/usr/src/app
+    ports:
+    - 3333:3333
+
