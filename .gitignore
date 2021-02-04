@@ -26,3 +26,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode
+#calugon個人的メモ
+command.md
