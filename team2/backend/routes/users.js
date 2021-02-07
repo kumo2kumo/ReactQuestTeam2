@@ -9,15 +9,26 @@
 // module.exports = router;
 
 const request = require('request-promise');
+const jwt = require('jsonwebtoken');
+
+const payload = {
+  iss: process.env.ZOOM_API_KEY,
+  exp: ((new Date()).getTime() + 5000)
+};
+const token = jwt.sign(payload, process.env.ZOOM_API_SECRET);
+const zoomMeetingID = '79564645901';
+
+
 // const url = 'https://google.com';
-const url = 'https://api.zoom.us/v2/meetings/{72923573760}'
+const url = 'https://api.zoom.us/v2/meetings/79564645901';
 const options = {
   url: url,
   method: 'GET',
   json: true,
   headers: {
     'User-Agent': 'Zoom-Jwt-Request',
-    'content-type': 'application/json'
+    Authorization: `Bearer ${token}`,
+    'content-type': 'application/json',
   },
   resolveWithFullResponse: true,
   simple: true,
