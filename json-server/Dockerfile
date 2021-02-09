@@ -1,0 +1,10 @@
+FROM node:14-alpine
+
+ARG JSON_SERVER_PORT
+ENV JSON_SERVER_PORT=$JSON_SERVER_PORT
+
+WORKDIR /data
+
+RUN npm install -g json-server
+
+EXPOSE 3838

@@ -1,0 +1,24 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "title": "hello",
+      "memo": "hi",
+      "start_time": "2021-02-05T05:30:00Z",
+      "end_time": "2021-02-05T06:00:00Z",
+      "URL": "https://us04web.zoom.us/j/74222833673?pwd=b3JnZnJpS0VLZ29GMUEra3owcjZRZz09",
+      "meeting_id": "74222833673",
+      "owner": "team2"
+    },
+    {
+      "title": "test",
+      "memo": "test",
+      "start_time": "2021-02-05T05:30:00Z",
+      "end_time": "2021-02-05T06:00:00Z",
+      "URL": "https://us04web.zoom.us/j/74222833673?pwd=b3JnZnJpS0VLZ29GMUEra3owcjZRZz09",
+      "meeting_id": "74222833673",
+      "owner": "team22",
+      "id": 2
+    }
+  ]
+}

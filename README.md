@@ -6,6 +6,10 @@ by T & M & C
 docker-compose.ymlがある場所で  
 `docker-compose up -d`
 
+
+### [追記]json-serverコンテナ
+`docker-compose up -d`した時点で動き出すので特にノータッチでokです
+
 ### Reactコンテナ
 1. `docker-compose exec react sh`  
 でコンテナにイン
@@ -19,3 +23,4 @@ docker-compose.ymlがある場所で
 2. `cd backend` & `npm install`
 
 > サーバーの立ち上げは `npm run dev`
+

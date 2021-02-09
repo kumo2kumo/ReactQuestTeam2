@@ -22,3 +22,12 @@ services:
     ports:
     - 3333:3333
 
+  json-server:
+    container_name: json-server
+    build: ./json-server/
+    tty: true
+    volumes:
+      - ./team2/json-server:/data
+    ports:
+      - 3838:3838
+    command: json-server --watch db.json --port 3838 --host 0.0.0.0
