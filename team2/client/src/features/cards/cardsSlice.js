@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, nanoid } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // fake data
 const initialState = {
@@ -10,40 +11,62 @@ const initialState = {
     error: null
 
 }
+
+/* (dispatch(getCardInfo))でdispathできる
+状態がpending, fulfilled, rejectedの3段階に分かれる */
+export const getCardInfo = createAsyncThunk(
+    'cards/getCardInfo',
+    async (meetingId, thunkAPI) => {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/users/' + meetingId)
+    let data = {url: response.data.website, name: response.data.name}
+    return data
+})
+
+
 const cardsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
-        // TODO 仮
-        addCard(state, action) {
-            state.posts.push(action.payload)
+        addCard: (state, action) => {
+            state.cards.push(action.payload)
         }
+        // TODO 仮
+        // addCard: {
+        //     reducer(state, action) {
+        //         state.cards.push(action.payload)
+        //     },
+        // prepare(title, memo, meetingId, url, owner){
+        //     return {
+        //         payload: {
+        //             id: nanoid(),
+        //             title,
+        //             memo, 
+        //             meetingId,
+        //             url,
+        //             owner
+        //         }
+        //     }
+        // },
+        // }
     },
     extraReducers: {
-        [addCardByapi.pending]: (state, action) => {
+        [getCardInfo.pending]: (state, action) => {
             state.status = 'pending'
         },
-        [addCardByapi.fulfilled]: (state, action) => {
+        [getCardInfo.fulfilled]: (state, action) => {
             state.status = 'success'
-            //TODO cardsArrayに追加
-            state.cards = state.posts.
+            state.cards = state.cards.concat({
+                id: nanoid(),
+                data: action.payload
+            })
         },
-        [addCardByapi.rejected]: (state, action) => {
-            state.status = 'failed',
-            state.error = action.error.message
+        [getCardInfo.rejected]: (state, action) => {
+            state.status = 'failed'
+            // state.error = action.error.message
         }
     }
 })
 
-// TODO apiserverとのやりとり→dispatchするためのaction creator
-// (dispatch(getCardInfo))でdispathできる
-//状態がpending, fulfilled, rejectedの3段階に分かれる
-export const getCardInfo = createAsyncThunk('cards/addCardByapi', async () => {
-    const respone = await axios.get('url')
-    return Response.data
-    //TODO payload作成
-})
 
-//TODO selector記入
 export const { addCard } = cardsSlice.actions
 export default cardsSlice.reducer
