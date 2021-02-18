@@ -6,9 +6,9 @@ const request = require('request-promise');
 
 // 定数
 const userId = 'masanori.takahashi.0117@gmail.com'; // Zoomアカウント(メールアドレス)
-const meetingId = '';
-const apiKey = ''; // api key
-const apiSecret = ''; // api secret
+const meetingId = '75189674459';
+const apiKey = 'nJTtqXAKTFWW5Ttx85_Lvw'; // api key
+const apiSecret = 'vtA5N3rtvbiQxQyTtMsMZapDkWLG1QVPvj67'; // api secret
 
 // payload
 const payload = {
