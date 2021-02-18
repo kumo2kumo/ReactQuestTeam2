@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { AutoJoin } from "../modules/AutoJoin";
 import { Link, Card, CardContent, Typography, makeStyles } from '@material-ui/core';
 import AlarmTwoToneIcon from '@material-ui/icons/AlarmTwoTone';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
@@ -27,28 +28,10 @@ export const CardItem = () => {
     
     //自動立ち上げ機能
     useEffect(() => {
-        const start_time = new Date("2021-02-18T08:50:00Z");
-        let is_started = false;
-
-        const autoJoinTimer = setInterval(() => {
-            const dt = new Date();
-            console.log(dt);
-            if (dt.getMonth() === start_time.getMonth() &&
-                dt.getDate() === start_time.getDate() &&
-                dt.getHours() === start_time.getHours() &&
-                dt.getMinutes() === start_time.getMinutes()
-            ) {
-                window.open("https://ja.reactjs.org/docs/state-and-lifecycle.html");//URL入れる
-                is_started = true;
-                clearInterval(autoJoinTimer);
-            }
-            console.log('func; ' + is_started);
-        }, 60 * 1000);
-        return () => {
-            clearInterval(autoJoinTimer);
-        }
-        // TODO URL, time入れ込み
+        AutoJoin("2021-02-18T09:38:00Z", "https://www.google.com/")
+        // TODO  URL, timeのstate入れ込み
     }, [/* url or timeが変わった場合*/]);
+
 
     return (
         <Card className={classes.root}>
