@@ -1,60 +1,14 @@
-// var express = require('express');
-// var router = express.Router();
-
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource aaa');
-// });
-
-// module.exports = router;
-
-// const request = require('request-promise');
-// const jwt = require('jsonwebtoken');
-
-// const payload = {
-//   iss: process.env.ZOOM_API_KEY,
-//   exp: ((new Date()).getTime() + 5000)
-// };
-// const token = jwt.sign(payload, process.env.ZOOM_API_SECRET);
-// const zoomMeetingID = '79564645901';
-
-
-// // const url = 'https://google.com';
-// const url = 'https://api.zoom.us/v2/meetings/79564645901';
-// const options = {
-//   url: url,
-//   method: 'GET',
-//   json: true,
-//   headers: {
-//     'User-Agent': 'Zoom-Jwt-Request',
-//     Authorization: `Bearer ${token}`,
-//     'content-type': 'application/json',
-//   },
-//   resolveWithFullResponse: true,
-//   simple: true,
-// };
-
-// const get_api = (req, res, next) => {
-//   request(options, function(error, response, body) {
-//   console.log(body);
-//   console.log(response);
-//   console.log(error);
-//   res.send(body);
-//   // res.send(response);
-// })};
-
-// module.exports = get_api;
-
-
 // 依存ライブラリ
 var express = require('express');
+var router = express.Router();
 const jwt = require('jsonwebtoken');
 const request = require('request-promise');
 
 // 定数
-const userId = ''; // Zoomアカウント(メールアドレス)
-const apiKey = ''; // api key
-const apiSecret = ''; // api secret
+const userId = 'masanori.takahashi.0117@gmail.com'; // Zoomアカウント(メールアドレス)
+const meetingId = '75189674459';
+const apiKey = 'nJTtqXAKTFWW5Ttx85_Lvw'; // api key
+const apiSecret = 'vtA5N3rtvbiQxQyTtMsMZapDkWLG1QVPvj67'; // api secret
 
 // payload
 const payload = {
@@ -65,8 +19,8 @@ const payload = {
 // token生成
 const token = jwt.sign(payload, apiSecret);
 
-// APIリクエストの設定
-let options = {
+// POSTによるMeeting情報の作成 (今回は未使用)
+let postOptions = {
    method: 'POST',
    url: 'https://api.zoom.us/v2/users/' + userId + '/meetings',
    auth: { 'bearer': token },
@@ -82,8 +36,19 @@ let options = {
    }
 };
 
+// Meeting情報のGETリクエスト
+let getOptions = {
+  method: 'GET',
+  url: 'https://api.zoom.us/v2/meetings/' + meetingId,
+  auth: { 'bearer': token },
+  headers: {
+      'User-Agent': 'Zoom-api-Jwt-Request',
+      'content-type': 'application/json'
+  }
+};
+
 const get_api = (req, res, next) => {
-  request(options, function(error, response, body) {
+  request(getOptions, function(error, response, body) {
   console.log(body);
   console.log(response);
   console.log(error);
