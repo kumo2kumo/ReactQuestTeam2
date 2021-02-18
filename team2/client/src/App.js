@@ -2,7 +2,6 @@
 import ScheduledList from './features/cards/ScheduledList';
 import CompletedList from './features/cards/CompletedList';
 import Grid from '@material-ui/core/Grid';
-import { TestForm } from './features/cards/@@testForm';
 
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
         <ScheduledList />
         <CompletedList />
       </Grid>
-      <TestForm />
     </div>
   );
 }
