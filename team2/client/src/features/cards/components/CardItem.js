@@ -4,6 +4,7 @@ import { Link, Card, CardContent, Typography, makeStyles } from '@material-ui/co
 import AlarmTwoToneIcon from '@material-ui/icons/AlarmTwoTone';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import AddToQueueTwoToneIcon from '@material-ui/icons/AddToQueueTwoTone';
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -26,9 +27,15 @@ const useStyles = makeStyles({
 export const CardItem = () => {
     const classes = useStyles();
     
+    useEffect(() => {
+        axios.get('/getMeeting')
+            .then(res => console.log(res.data))
+    })
+    
+
     //自動立ち上げ機能
     useEffect(() => {
-        AutoJoin("2021-02-18T09:38:00Z", "https://www.google.com/")
+        AutoJoin("2021-02-19T04:10:00Z", "https://www.google.com/")
         // TODO  URL, timeのstate入れ込み
     }, [/* url or timeが変わった場合*/]);
 

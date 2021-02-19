@@ -16,11 +16,24 @@ const initialState = {
 状態がpending, fulfilled, rejectedの3段階に分かれる */
 export const getCardInfo = createAsyncThunk(
     'cards/getCardInfo',
-    async (meetingId, thunkAPI) => {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/users/' + meetingId)
-    let data = {url: response.data.website, name: response.data.name}
+    async () => {
+    const response = await axios.get('/getMeeting')
+        let data = {
+            title: response.data.topic,
+            mettingID: response.data.id,
+            owner: response.data.host_email,
+            url: response.data.start_url,
+            start_time: response.data.start_time,
+        }
     return data
 })
+// export const getCardInfo = createAsyncThunk(
+//     'cards/getCardInfo',
+//     async (meetingId, thunkAPI) => {
+//     const response = await axios.get('https://jsonplaceholder.typicode.com/users/' + meetingId)
+//     let data = {url: response.data.website, name: response.data.name}
+//     return data
+// })
 
 
 const cardsSlice = createSlice({
@@ -57,6 +70,7 @@ const cardsSlice = createSlice({
             state.status = 'success'
             state.cards = state.cards.concat({
                 id: nanoid(),
+                delete: false,
                 data: action.payload
             })
         },

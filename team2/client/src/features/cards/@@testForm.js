@@ -15,7 +15,7 @@ export const TestForm = () => {
 
     const onSaveCardClicked = () => {
         // dispatch(cardInfo())
-        dispatch(getCardInfo(1))
+        dispatch(getCardInfo())
         }
 
     return (
