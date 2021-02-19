@@ -1,10 +1,10 @@
 import React from 'react';
-
+import axios from 'axios'
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputNumber:'',
+      inputNumber: '',
       meetingId: '',
     };
 
@@ -18,15 +18,24 @@ class Form extends React.Component {
     });
   }
 
-  handleSubmit(){
+  handleSubmit () {
+    
     let newNumber = this.state.inputNumber;
     this.setState({
-      inputNumber:"",
+      inputNumber: "",
       meetingId: newNumber,
     });
 
+    console.log(this.state.meetingId)
+    // ? meetingIdに値が入るタイミングが不明
+    axios.get('/getMeeting?id=' + this.state.inputNumber)
+    .then(function (response) {
+      // handle success
+      console.log(response.data);
+    })
   }
-
+    
+  
   render() {
     return (
       <div>
