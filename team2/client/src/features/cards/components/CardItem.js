@@ -35,7 +35,7 @@ export const CardItem = () => {
 
     //自動立ち上げ機能
     useEffect(() => {
-        AutoJoin("2021-02-19T04:10:00Z", "https://www.google.com/")
+        AutoJoin("2021-02-18T12:48:00Z", "https://www.google.com/")
         // TODO  URL, timeのstate入れ込み
     }, [/* url or timeが変わった場合*/]);
 
