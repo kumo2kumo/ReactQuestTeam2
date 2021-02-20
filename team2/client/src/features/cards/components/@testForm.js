@@ -4,7 +4,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import {getCardInfo, addCard, cardInfo} from "../cardsSlice";
+import { getCardInfo } from "../cardsSlice";
 
 export const TestForm = () => {
     const [title, setTitle] = useState('')
