@@ -1,5 +1,6 @@
 import React from 'react'
 import ScheduledButton from './components/ScheduledButton';
+import { useSelector } from 'react-redux';
 import { CardItem } from './components/CardItem'
 import { Box, Grid, makeStyles } from '@material-ui/core';
 
@@ -11,10 +12,15 @@ const useStyles = makeStyles({
         boxShadow: '2px 2px 5px 0px',
     }
 });
-
+const selectCardIds = state => state.cards.cards.map(card => card.id)
 
 export default function ScheduledList() {
     const classes = useStyles();
+    const cardIds = useSelector(selectCardIds)
+
+    const renderCardItems = cardIds.map(cardId => {
+        return <CardItem key={cardId} id={cardId}/>
+    })
 
     return (
         <Grid item xs={5}>
@@ -23,8 +29,7 @@ export default function ScheduledList() {
                 <hr />
                 <ScheduledButton/>
                     <Box pb={3} pt={3}>
-                        <CardItem />
-                        <CardItem />
+                        {renderCardItems}
                     </Box>
             </Box>
         </Grid>    
