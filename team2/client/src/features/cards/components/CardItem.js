@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { AutoJoin } from "../modules/AutoJoin";
 import { Link, Card, CardContent, Typography, makeStyles } from '@material-ui/core';
 import AlarmTwoToneIcon from '@material-ui/icons/AlarmTwoTone';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import AddToQueueTwoToneIcon from '@material-ui/icons/AddToQueueTwoTone';
+// import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -23,14 +25,19 @@ const useStyles = makeStyles({
 })
 
 
-export const CardItem = () => {
+export const CardItem = (props) => {
     const classes = useStyles();
-    
+
+    const selectCardById = (state, cardId) => {
+        return state.cards.cards.find(card => card.id === cardId)
+    } 
+    const cardContent = useSelector(state => selectCardById(state, props.id))
+    const { title, meetingId, owner, url, startTime } = cardContent.data
+    const jaStartTime = new Date(startTime).toLocaleString("ja")
     //自動立ち上げ機能
     useEffect(() => {
-        AutoJoin("2021-02-18T12:48:00Z", "https://www.google.com/")
-        // TODO  URL, timeのstate入れ込み
-    }, [/* url or timeが変わった場合*/]);
+        AutoJoin(startTime, url)
+    }, [url, startTime]);
 
 
     return (
@@ -40,32 +47,33 @@ export const CardItem = () => {
                 variant="h5"
                 gutterBottom 
                 style={{borderBottom: '1px solid #000'}}>
-                    hi there
+                    {title}
                 </Typography>
                 <Typography color="textSecondary">
-                    meetingID: <span style={{fontWeight: 'bolder'}}>3432423</span>
+                    meetingID:
+                    <span style={{ fontWeight: 'bolder', marginLeft: '0.4rem'}}>{meetingId}</span>
                 </Typography>
                 <Typography color="textSecondary">
                     <AccountCircleTwoToneIcon 
                     fontSize="small" 
                     className={classes.icon}
                     />
-                    owner
-                    <span style={{fontWeight: 'bolder', marginLeft: '1rem'}}>amer@gemil.com  </span>
+                    owner:
+                    <span style={{ fontWeight: 'bolder', marginLeft: '0.4rem' }}>{owner}</span>
                 </Typography>
                 <Typography color="textSecondary">
                     <AlarmTwoToneIcon 
                     fontSize="small" 
                     className={classes.icon}
                     />
-                    <span style={{fontWeight: 'bolder'}}> 17:30</span>
+                    <span style={{ fontWeight: 'bolder' }}> {jaStartTime}</span>
                 </Typography>
-                <Link href="https://www.google.com" underline="hover">
+                <Link href={url} underline="hover">
                     <AddToQueueTwoToneIcon
                     fontSize="small" 
                     className={classes.icon}
                     />
-                    https://www.google.com
+                    {url.substring(0, 26)}
                 </Link>
             </CardContent>
         </Card>
