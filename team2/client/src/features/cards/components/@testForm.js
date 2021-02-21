@@ -7,20 +7,21 @@ import { useDispatch } from 'react-redux'
 import { getCardInfo } from "../cardsSlice";
 
 export const TestForm = () => {
-    const [meetingID, setMeetingID] = useState('')
+    const [meetingId, setmeetingId] = useState('')
 
-    const onMeetingIDChange = (e) => {setMeetingID(e.target.value)}
+    const onmeetingIdChange = (e) => {setmeetingId(e.target.value)}
 
     const dispatch = useDispatch()
 
     const onSaveCardClicked = () => {
-        dispatch(getCardInfo(meetingID))
-        }
+        const reMeetingId = meetingId.replace(/\s+/g, '') //空白があったら削除
+        dispatch(getCardInfo(reMeetingId))
+    }
 
     return (
         <div>
             <form>
-                <input value={meetingID} onChange={onMeetingIDChange}></input>
+                <input value={meetingId} onChange={onmeetingIdChange}></input>
                 <button type="button"  onClick={onSaveCardClicked}>go</button>
             </form>
         </div>

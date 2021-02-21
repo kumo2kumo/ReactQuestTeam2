@@ -17,9 +17,9 @@ const selectCardIds = state => state.cards.cards.map(card => card.id)
 export default function ScheduledList() {
     const classes = useStyles();
     const cardIds = useSelector(selectCardIds)
-
     const renderCardItems = cardIds.map(cardId => {
-        return <CardItem key={cardId} id={cardId}/>
+        return <CardItem key={cardId} id={cardId} />
+        
     })
 
     return (

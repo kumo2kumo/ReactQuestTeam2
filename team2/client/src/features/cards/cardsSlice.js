@@ -4,8 +4,17 @@ import axios from 'axios';
 // fake data
 const initialState = {
     cards: [
-    { id: '1', title: 'test1', memo: 'new', url: '111', stare_time: '17:00', owner: 'aaa', meetingId: '74867845461', delete: false},
-    { id: '2', title: 'test2', memo: 'new2', url: '222', stare_time: '18:00', owner: 'bbb', meetingId: '456', delete: false}
+        {
+            id: '1', delete: false,
+            data: {
+                "title": "calu gonのZoomミーティング",
+                "meetingId": 77847313094,
+                "owner": "test.com",
+                "url": "https://us04web.zoom.us/j/77847313094?pwd=cW12aWlZVE5zeFlyS05Eckl6V0NpUT09",
+                "startTime": "2021-02-19T16:30:00Z"
+                
+            }
+        }
     ],
     status: 'idle',
     error: null
@@ -16,14 +25,14 @@ const initialState = {
 状態がpending, fulfilled, rejectedの3段階に分かれる */
 export const getCardInfo = createAsyncThunk(
     'cards/getCardInfo',
-    async () => {
-    const response = await axios.get('/getMeeting')
+    async (meetingId) => {
+        const response = await axios.get('/getMeeting?id=' + meetingId)
         let data = {
             title: response.data.topic,
-            mettingID: response.data.id,
+            meetingId: response.data.id,
             owner: response.data.host_email,
-            url: response.data.start_url,
-            start_time: response.data.start_time,
+            url: response.data.join_url,
+            startTime: response.data.start_time,
         }
     return data
 })

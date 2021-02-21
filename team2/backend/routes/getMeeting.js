@@ -10,10 +10,10 @@ router.get('/', function(req, res, next) {
   const meetingId = req.query.id
 
   // 定数
-  const userId = 'amgokuraku@gmail.com'; // Zoomアカウント(メールアドレス)
+  const userId = ''; // Zoomアカウント(メールアドレス)
   // const meetingId = '74867845461';
-  const apiKey = 'wDtULqd0R42LAZvFhfyC_w'; // api key
-  const apiSecret = 'GQETjwVdHavzO5jbGfuMr3c919fuT3sTE11Z'; // api secret
+  const apiKey = ''; // api key
+  const apiSecret = ''; // api secret
   
   // payload
   const payload = {
